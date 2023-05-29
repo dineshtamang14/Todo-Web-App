@@ -3,8 +3,10 @@ dotenv.config();
 const mongoose = require('mongoose');
 const settings = require('../controllers/settings')
 
+const url = `mongodb://${process.env.MONGO_URL}:27017/todoDB`
+
 function connectMongoDb() {
-    mongoose.connect(process.env.MONGO_URL || settings.dbURI, { 
+    mongoose.connect(url || settings.dbURI, { 
       useNewUrlParser: true, 
       useUnifiedTopology: true
     });
