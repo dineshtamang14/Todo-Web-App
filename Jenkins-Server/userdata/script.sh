@@ -29,7 +29,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io
 
 # Add current user to Docker group
 sudo usermod -aG docker ${USER}
-
+sudo usermod -aG docker jenkins
 # Start Docker service
 sudo systemctl start docker
 
@@ -64,6 +64,6 @@ systemctl enable nginx.service
 systemctl restart nginx.service
 sudo ufw allow 80
 
-echo "System reboot in 20 sec"
+echo "System reboot in 2 sec"
 sleep 2
 sudo reboot

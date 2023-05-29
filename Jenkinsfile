@@ -31,7 +31,7 @@ pipeline {
         }
         steps {
            withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-                sh 'npm install -g sonarqube-scanner' // Install SonarQube scanner
+                sh 'yarn global add sonarqube-scanner' // Install SonarQube scanner
                 sh 'sonar-scanner -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}' // Run SonarQube scanner
             }
         }
