@@ -9,9 +9,10 @@ module "ec2-instance" {
   associate_public_ip_address = true
   vpc_security_group_ids      = ["${aws_security_group.jenkins-sg.id}"]
 
-  hibernation = false
-  key_name    = "application-server-key"
-  user_data   = file("${path.module}/userdata/script.sh")
+  hibernation   = false
+  key_name      = "application-server-key"
+  user_data     = file("${path.module}/userdata/script.sh")
+  iam_instance_profile = "arn:aws:iam::120211568300:instance-profile/Jenkins-Roles"
 
   enable_volume_tags = false
   root_block_device = [

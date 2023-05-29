@@ -15,6 +15,7 @@ resource "null_resource" "jenkins-initialpass" {
   provisioner "remote-exec" {
     inline = [
       "while ! nc -z localhost 80; do sleep 1; done;",
+      "echo 'Jenkins initial Admin Password: '",
       "sudo cat /var/lib/jenkins/secrets/initialAdminPassword",
       "exit 1"
     ]
