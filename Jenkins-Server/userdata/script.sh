@@ -65,10 +65,10 @@ systemctl restart nginx.service
 sudo ufw allow 80
 
 # Node.js Installations
-curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt install nodejs -y
-sudo npm install -g sonarqube-scanner
-sudo npm install -g yarn
+# curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+# sudo apt install nodejs -y
+# sudo npm install -g sonarqube-scanner
+# sudo npm install -g yarn
 
 echo "System reboot in 2 sec"
 sleep 2
