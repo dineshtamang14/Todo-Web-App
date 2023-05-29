@@ -1,0 +1,19 @@
+version: '3'
+services:
+  todo-web-app:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: todo-web-app
+
+  nginx:
+    depends_on:
+      - todo-web-app
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
