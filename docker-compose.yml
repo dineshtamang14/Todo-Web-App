@@ -1,15 +1,17 @@
-version: '3'
+version: '3.3'
 services:
-  todo-web-app:
+  todo-client:
     restart: always
     build:
       dockerfile: Dockerfile
       context: .
     container_name: todo-web-app
+    networks:
+      - todo
 
   nginx:
     depends_on:
-      - todo-web-app
+      - todo-client
     restart: always
     build:
       dockerfile: Dockerfile
@@ -17,3 +19,9 @@ services:
     container_name: nginx
     ports:
       - "80:80"
+    networks:
+      - todo
+
+networks:
+  todo:
+    driver: bridge

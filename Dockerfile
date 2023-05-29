@@ -1,11 +1,10 @@
-FROM node:16-alpine 
-LABEL "Name"="Todo web app"
+FROM node:16.17-alpine3.15
 WORKDIR /usr/src/app 
 COPY package.json package-lock.json ./
-RUN npm install
-RUN npm install -g nodemon
+RUN yarn install
 COPY . . 
+ENV MONGO_URL=mongodb+srv://dinesh:dinesh1997@cluster0.cuuqa.mongodb.net/todo-project-db?retryWrites=true&w=majority
 ENV PORT=3000
 EXPOSE $PORT 
-ENTRYPOINT [ "nodemon", "run" ]
-CMD [ "dev" ]
+ENTRYPOINT [ "yarn", "run" ]
+CMD [ "start" ]
