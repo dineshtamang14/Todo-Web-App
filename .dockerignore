@@ -6,3 +6,7 @@ README.md
 node_modules
 .env
 Procfile
+nginx
+Jenkins-Server
+Jenkinsfile
+kubernetes
