@@ -4,6 +4,7 @@ def COLOR_MAP = [
 ]
 
 pipeline {
+    agent any 
 //   agent {
 //     docker {
 //       image 'node:16.17-alpine3.15'
