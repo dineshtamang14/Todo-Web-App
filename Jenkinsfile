@@ -49,7 +49,7 @@ pipeline {
 
     stage('Build and Push Docker Image') {
         environment {
-            DOCKER_IMAGE = "dineshtamang14/todo-app:v${BUILD_NUMBER}"
+            DOCKER_IMAGE = "dineshtamang14/todo-app:${BUILD_NUMBER}"
             REGISTRY_CREDENTIALS = credentials('docker-cred')
         }
         steps {

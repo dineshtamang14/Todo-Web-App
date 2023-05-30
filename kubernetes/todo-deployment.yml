@@ -20,7 +20,7 @@ spec:
           command: ['sh', '-c', 'echo -e "Checking for the availability of MongoDB Server deployment"; while ! nc -z mongodb-svc 27017; do sleep 1; printf "-"; done; echo -e "  >> MongoDB Server has started";']
       containers:
         - name: todo
-          image: dineshtamang14/todo-app:1
+          image: dineshtamang14/todo-app:latest
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
