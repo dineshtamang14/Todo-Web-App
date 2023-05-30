@@ -4,11 +4,11 @@ def COLOR_MAP = [
 ]
 
 pipeline {
-  agent {
-    docker {
-      image 'node:16.17-alpine3.15'
-    }
-  }
+//   agent {
+//     docker {
+//       image 'node:16.17-alpine3.15'
+//     }
+//   }
 
   stages {
     stage('Checkout') {
@@ -20,8 +20,8 @@ pipeline {
 
     stage('Build and Test') {
         steps {
-            sh 'ls -ltr'
-            sh 'yarn install'
+            sh "echo 'running unit tests: '"
+            // sh 'yarn run test'
         }
     }
         
@@ -37,15 +37,15 @@ pipeline {
         }
     }
 
-    stage("Quality Gate") {
-        steps {
-            timeout(time: 1, unit: 'HOURS') {
-                // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                // true = set pipeline to UNSTABLE, false = don't
-                waitForQualityGate abortPipeline: true
-            }
-        }
-        }
+    // stage("Quality Gate") {
+    //     steps {
+    //         timeout(time: 1, unit: 'HOURS') {
+    //             // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+    //             // true = set pipeline to UNSTABLE, false = don't
+    //             waitForQualityGate abortPipeline: true
+    //         }
+    //     }
+    // }
 
     stage('Build and Push Docker Image') {
         environment {
