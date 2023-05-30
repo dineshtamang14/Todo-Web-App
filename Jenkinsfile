@@ -49,7 +49,7 @@ pipeline {
 
     stage('Build and Push Docker Image') {
         environment {
-            DOCKER_IMAGE = "dineshtamang14/todo-app:${BUILD_NUMBER}"
+            DOCKER_IMAGE = "dineshtamang14/todo-app:v${BUILD_NUMBER}"
             REGISTRY_CREDENTIALS = credentials('docker-cred')
         }
         steps {
@@ -63,7 +63,7 @@ pipeline {
         }
     }
         
-    stage('Update Deployment File') {
+    stage('ArgoCD Image Updater') {
         environment {
             GIT_REPO_NAME = "Todo-Web-App"
             GIT_USER_NAME = "dineshtamang14"
