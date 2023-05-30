@@ -26,15 +26,26 @@ pipeline {
     }
         
     stage('Static Code Analysis') {
-        environment {
-            SONAR_URL = 'sonarserver'
-        }
         steps {
-           withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-                sh 'sonar-scanner -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}' // Run SonarQube scanner
+            nodejs(nodeJSInstallationName: 'nodejs'){
+                sh "yarn install"
+                withSonarQubeEnv('sonar'){
+                    sh "yarn add sonar-scanner"
+                    sh "yarn run sonar"
+                }
             }
         }
     }
+
+    stage("Quality Gate") {
+        steps {
+            timeout(time: 1, unit: 'HOURS') {
+                // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                // true = set pipeline to UNSTABLE, false = don't
+                waitForQualityGate abortPipeline: true
+            }
+        }
+        }
 
     stage('Build and Push Docker Image') {
         environment {
