@@ -5,7 +5,7 @@ module "ec2-instance" {
   name = "jenkins-server"
 
   ami                         = data.aws_ami.ubuntu.id
-  instance_type               = "t2.micro"
+  instance_type               = "t2.small"
   associate_public_ip_address = true
   vpc_security_group_ids      = ["${aws_security_group.jenkins-sg.id}"]
 
@@ -13,19 +13,16 @@ module "ec2-instance" {
   key_name    = "application-server-key"
   user_data   = file("${path.module}/userdata/script.sh")
 
-  iam_role_path = "arn:aws:iam::120211568300:instance-profile/Jenkins-Roles"
+  iam_instance_profile = "Jenkins-Roles"
+  # iam_role_path = "arn:aws:iam::120211568300:instance-profile/Jenkins-Roles"
 
-  enable_volume_tags = false
   root_block_device = [
     {
       encrypted   = true
       volume_type = "gp3"
       throughput  = 200
       volume_size = 16
-      tags = {
-        Name = "root-ebs"
-      }
-    },
+    }
   ]
 
   tags = {
