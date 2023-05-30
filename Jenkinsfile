@@ -4,12 +4,12 @@ def COLOR_MAP = [
 ]
 
 pipeline {
-    agent any 
-//   agent {
-//     docker {
-//       image 'node:16.17-alpine3.15'
-//     }
-//   }
+    // agent any 
+  agent {
+    docker {
+      image 'node:latest'
+    }
+  }
 
   stages {
     stage('Checkout') {
@@ -22,6 +22,7 @@ pipeline {
     stage('Build and Test') {
         steps {
             sh "echo 'running unit tests: '"
+            sh 'yarn install'
             // sh 'yarn run test'
         }
     }
@@ -29,10 +30,9 @@ pipeline {
     stage('Static Code Analysis') {
         steps {
             nodejs(nodeJSInstallationName: 'nodejs'){
-                sh "npm install"
                 withSonarQubeEnv('sonar'){
-                    sh "npm install sonar-scanner"
-                    sh "npm run sonar"
+                    sh "yarn add sonar-scanner"
+                    sh "yarn run sonar"
                 }
             }
         }
