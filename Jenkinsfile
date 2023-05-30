@@ -4,12 +4,12 @@ def COLOR_MAP = [
 ]
 
 pipeline {
-    // agent any 
-  agent {
-    docker {
-      image 'node:latest'
-    }
-  }
+    agent any 
+//   agent {
+//     docker {
+//       image 'node:latest'
+//     }
+//   }
 
   stages {
     stage('Checkout') {
