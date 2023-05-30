@@ -29,10 +29,10 @@ pipeline {
     stage('Static Code Analysis') {
         steps {
             nodejs(nodeJSInstallationName: 'nodejs'){
-                sh "yarn install"
+                sh "npm install"
                 withSonarQubeEnv('sonar'){
-                    sh "yarn add sonar-scanner"
-                    sh "yarn run sonar"
+                    sh "npm install sonar-scanner"
+                    sh "npm run sonar"
                 }
             }
         }
